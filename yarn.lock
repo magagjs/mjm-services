@@ -1299,6 +1299,11 @@
     node-gyp "^7.1.0"
     read-package-json-fast "^2.0.1"
 
+"@popperjs/core@^2.10.1":
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.10.1.tgz#728ecd95ab207aab8a9a4e421f0422db329232be"
+  integrity sha512-HnUhk1Sy9IuKrxEMdIRCxpIqPw6BFsbYSEUO9p/hNw5sMld/+3OLMWQP80F8/db9qsv3qUjs7ZR5bS/R+iinXw==
+
 "@schematics/angular@12.2.6":
   version "12.2.6"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-12.2.6.tgz#bf48e80e9b1db406d0eb7a5200d0f8661d1d05f2"
@@ -2011,6 +2016,16 @@ boolbase@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
+
+bootstrap-icons@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/bootstrap-icons/-/bootstrap-icons-1.5.0.tgz#2cb19da148aa9105cb3174de2963564982d3dc55"
+  integrity sha512-44feMc7DE1Ccpsas/1wioN8ewFJNquvi5FewA06wLnqct7CwMdGDVy41ieHaacogzDqLfG8nADIvMNp9e4bfbA==
+
+bootstrap@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.1.1.tgz#9d6eed81e08feaccedf3adaca51fe4b73a2871df"
+  integrity sha512-/jUa4sSuDZWlDLQ1gwQQR8uoYSvLJzDd8m5o6bPKh3asLAMYVZKdRCjb1joUd5WXf0WwCNzd2EjwQQhupou0dA==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -5094,6 +5109,13 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+ngx-bootstrap@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-7.1.0.tgz#60cd83b1d2da52ffd9f8ca6f270e77010d55cf5a"
+  integrity sha512-2qUTqq+DtimKpYNEga85G00zdMEZ2fcvtYaZkrdZRtwqyCXbPC69LXXzLkgu5697m83++iFWvwFp0IJDuGev1A==
+  dependencies:
+    tslib "^2.0.0"
 
 nice-napi@^1.0.2:
   version "1.0.2"

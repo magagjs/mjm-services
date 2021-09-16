@@ -1,0 +1,81 @@
+<nav class="navbar sticky-top navbar-expand-md">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/" aria-labelledby="mjm-home-link">
+            <span class="visually-hidden">Company logo linking to website home page</span>
+            <img src="assets/mjm-logo-104x92.jpg" alt="" class="float-start ps-5">
+        </a>
+
+        <span class="visually-hidden">Navigation Menu</span>
+        <button class="navbar-toggler collapsed" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapsedNavbar">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsedNavbar" [collapse]="!isCollapsed" [isAnimated]="true">
+            <ul class="navbar-nav ms-2 top-nav" role="menubar" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+                <li class="nav-item" routerLinkActive="active-nav-item" role="menuitem" aria-labelledby="mjm-home">
+                    <a class="nav-link" routerLink="/" routerLinkActive="mjm-active-nav-link" itemprop="url">
+                        <span id="mjm-home" itemprop="name">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item" routerLinkActive="active-nav-item" role="menuitem" aria-labelledby="mjm-offers">
+                    <a class="nav-link" routerLink="/offers" routerLinkActive="mjm-active-nav-link" itemprop="url">
+                        <span id="mjm-offers" itemprop="name">Offers</span>
+                    </a>
+                </li>
+                <li class="nav-item" routerLinkActive="active-nav-item" role="menuitem" aria-labelledby="mjm-bookings">
+                    <a class="nav-link" routerLink="/bookings" routerLinkActive="mjm-active-nav-link" itemprop="url">
+                        <span id="mjm-bookings" itemprop="name">Bookings</span>
+                    </a>
+                </li>
+                <li class="nav-item" role="menuitem" aria-labelledby="mjm-quote">
+                    <a class="nav-link" routerLink="/quote" itemprop="url">
+                        <span id="mjm-quote" itemprop="name">Quote</span>
+                    </a>
+                </li>
+                <li class="nav-item" role="menuitem" aria-labelledby="mjm-about">
+                    <a class="nav-link" routerLink="/about" itemprop="url">
+                        <span id="mjm-about" itemprop="name">About Us</span>
+                    </a>
+                </li>
+                <li class="nav-item" role="menuitem" aria-labelledby="mjm-contact">
+                    <a class="nav-link" routerLink="/contact" itemprop="url">
+                        <span id="mjm-contact" itemprop="name">Contact Us</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-md-auto d-none d-lg-inline-flex" id="social-links">
+                <li class="nav-item" role="menuitem" aria-labelledby="mjm-twitter">
+                    <a class="nav-link" routerLink="/twitter">
+                        <i class="bi bi-twitter" width="16px" height="16px" role="img" aria-label="Twitter"></i>
+                    </a>
+                </li>
+                <li class="nav-item" role="menuitem" aria-labelledby="mjm-facebook">
+                    <a class="nav-link" routerLink="/facebook">
+                        <i class="bi bi-facebook" width="16px" height="16px" role="img" aria-label="Facebook"></i>
+                    </a>
+                </li>
+                <li class="nav-item" role="menuitem" aria-labelledby="mjm-instagram">
+                    <a class="nav-link" routerLink="/instagram">
+                        <i class="bi bi-instagram" width="16px" height="16px" role="img" aria-label="Instagram"></i>
+                    </a>
+                </li>
+                <li class="nav-item" role="menuitem" aria-labelledby="mjm-whatsapp">
+                    <a class="nav-link" routerLink="/whatsapp">
+                        <i class="bi bi-whatsapp" width="16px" height="16px" role="img" aria-label="WhatsApp"></i>
+                    </a>
+                </li>
+                <li class="nav-item" role="menuitem" aria-labelledby="mjm-youtube">
+                    <a class="nav-link" routerLink="/youtube">
+                        <i class="bi bi-youtube" width="16px" height="16px" role="img" aria-label="Youtube"></i>
+                    </a>
+                </li>
+                <li class="nav-item" role="menuitem" aria-labelledby="mjm-linkedin">
+                    <a class="nav-link" routerLink="/linkedin">
+                        <i class="bi bi-linkedin" width="16px" height="16px" role="img" aria-label="LinkedIn"></i>
+                    </a>
+                </li>
+            </ul>
+        </div> 
+    </div>
+</nav>
