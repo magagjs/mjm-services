@@ -1,10 +1,21 @@
-html {scroll-behavior: smooth;}
+$screen-lg-default: 960px;                 // large device-default 992px, 960=tablet landscape
+$screen-lg-max-width: 1200px;              // large device maximum width
+$screen-md-default: 768px;                 // medium device-tablets
+$screen-md-max-width: $screen-lg-default;  // medium device-Set to just below large max
+$screen-sm-max-width: 576px;               // small device width
+
 html, body { height: 100%; }
 body { 
     margin: 0; 
-    font-family: "Helvetica Neue", "Helvetica", "Arial" sans-serif;
+    font-family: 'Roboto', sans-serif;
     //padding-top: 75px;  // push body down to make space for navbar on smaller devices
 }
+h1,h2{ 
+    color: #B22222;
+    font-weight: 900;
+}
+.y-mandatory-scroll-snap { scroll-snap-type: y mandatory; }
+.x-mandatory-scroll-snap { scroll-snap-type: x mandatory; }
 .navbar { 
     background-color: #ffffff;
     padding-bottom: 0;
@@ -15,24 +26,6 @@ body {
     text-decoration: none;
     color: #B22222;
 }
-ul.navbar-nav.top-nav li.nav-item:hover > a,
-ul.navbar-nav.top-nav li.nav-item:focus > a,
-ul.navbar-nav.top-nav li.nav-item:active > a {
-    font-weight: 800;
-    //color: #05052e;
-    text-decoration: none;
-    border-bottom-style: ridge;
-    border-radius: 5px;
-    border-color:#696969;
-}
-/*.navbar li.nav-item >a.nav-link.mjm-active-nav-link { // active navbar item
-    text-decoration: none;
-    font-weight: 800;
-    color: #B22222;
-    padding-right: .2rem;   // smaller spacing between active link item text and left/right borders
-    padding-left: .2rem;
-}*/
-
 .navbar-nav .bi-twitter, footer .bi-twitter { color: #1da1f2; }
 .navbar-nav .bi-facebook, footer .bi-facebook { color: #3b5998; }
 .navbar-nav .bi-instagram, 
@@ -57,7 +50,6 @@ ul.navbar-nav li.nav-item:active > a > .bi {
     color: #B22222;
 }
 
-
 footer { background-color: #A9A9A9; }
 footer h3 {font-size: 1.2rem; font-weight: 600; margin-bottom: 0;}
 footer ul { list-style: none; } 
@@ -76,4 +68,172 @@ footer ul > li:active > a > .bi {
     font-weight: 800;
     color: #B22222;
     text-shadow: 0px 14px 10px rgba(0, 0, 0, 0.4);
+}
+.carousel-indicators [data-bs-target] {
+    background-color: #8B0000;
+    border: 5px solid #8B0000;
+}
+.carousel-indicators button { border-radius: 5rem; }
+.mjm-offer-wrap {
+    background-color: #f6f7f8;
+    margin-top: 1.5rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    font-size: 1.2rem;
+}
+.mjm-offer-list ul { list-style: none; }
+.mjm-offer-list ul>li::marker {
+    content: "\f621\00a0\00a0"; // bootstrap wrench + two &nbsp;
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-size: 1.1rem;
+}
+.mjm-home-cards-wrap {
+    margin-top: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.mjm-home-cards { justify-content: center; }
+.mjm-home-cards a {
+    text-decoration: none;
+    color: inherit;
+}
+.mjm-home-cards .card {
+    width: 230px;
+    height: 180px;
+    border-color:#8B0000;
+    margin: .5rem;
+    border-top-left-radius: .8rem;
+    border-top-right-radius: .8rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.mjm-home-cards .card .card-body {
+    border-top:1px solid #8B0000;
+    padding: 0;
+}
+.mjm-home-cards .card:hover,
+.mjm-home-cards .card:focus,
+.mjm-home-cards .card:active {
+    background-color: #8B0000;
+    border-top:1px solid #ffffff;
+    color: #ffffff;
+    cursor: pointer;
+}
+.mjm-home-cards .card-title {
+    text-align: center;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+    font-weight: 800;
+    margin-bottom: 0;
+}
+.mjm-home-cards .card-text { font-size: .9rem; }
+.mjm-quote-wrap {
+    background: 
+        linear-gradient(280deg,#4b1111,#c00b0b, #8B0000);
+    color: #ffffff;
+}
+.mjm-quote-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.mjm-quote-container { text-align: center; }
+.mjm-quote-container .btn {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+.mjm-quote-container .btn-primary {
+    color: #000;
+    background-color: #A9A9A9;
+    border-color: #c00b0b;
+}
+.mjm-quote-container .btn-primary:hover {
+    background-color: #c00b0b;
+    border-color: #A9A9A9;
+    color: #ffffff;
+}
+.mjm-quote-container .btn-primary:focus {
+    background-color: #c00b0b;
+    border-color: #A9A9A9;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.25rem #ffffff;
+}
+.mjm-banner-wrap { text-align: center; }
+.mjm-banner-text {
+    font-style: italic;
+    font-size: 1.2rem;
+}
+.mjm-banner-img {
+    width: 150px;
+    height: auto;
+    margin: auto;
+}
+
+// large and up
+@media (min-width: $screen-lg-default) {
+    ul.navbar-nav.top-nav li.nav-item:hover > a,
+    ul.navbar-nav.top-nav li.nav-item:focus > a,
+    ul.navbar-nav.top-nav li.nav-item:active > a {
+        font-weight: 800;
+        color: #696969;
+        text-decoration: none;
+        border-bottom-style: ridge;
+        border-radius: 5px;
+        border-color:#696969;
+    }
+    .mjm-intro { font-size: 1.5rem; }
+    .mjm-offer-wrap ul { margin-top: 1.2rem; }
+    .mjm-offer-wrap ul>li{ margin-top: 1rem; }
+}
+
+// large to extra large
+@media (min-width: $screen-lg-default) and (max-width: $screen-lg-max-width) {
+    .mjm-offer-wrap {
+        margin-top: 1rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        font-size: .9rem;
+    }
+    .mjm-offer-list ul>li::marker { font-size: .8rem; }
+    .mjm-offer-wrap ul { margin-top: .5rem; }
+    .mjm-offer-wrap ul>li{ margin-top: .2rem; }
+}
+
+// large & down - for tablet landscape
+@media (max-width: $screen-lg-default) {
+    body { font-size: .85rem; }
+    .h1,h1 { font-size: 2rem; }
+    .h2,h2 { font-size: 1.5rem; }
+    ul.navbar-nav.top-nav li.nav-item:hover > a,
+    ul.navbar-nav.top-nav li.nav-item:focus > a,
+    ul.navbar-nav.top-nav li.nav-item:active > a {
+        font-weight: 800;
+        color: #696969;
+        text-decoration: none;
+    }
+    ul.navbar-nav li.nav-item:focus > a {
+        outline: 0;                               // suppress ring around element on touch
+        -webkit-tap-highlight-color: transparent; // suppress highlight color on Safari and Chrome touch
+    }
+    .mjm-offer-wrap {
+        margin-top: 1rem;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        font-size: .85rem;
+    }
+    .mjm-offer-list ul>li::marker { font-size: .75rem; }
+    .mjm-offer-wrap ul { margin-top: .2rem; }
+    .mjm-offer-wrap ul>li{ margin-top: 0; }
+}
+
+// small only
+@media (max-width: $screen-sm-max-width) {
+    h1 { font-size: 1.8rem; }
+    .mjm-offer-wrap { margin-top: 0; }
+    .mjm-home-cards-wrap {
+        margin-top: 0;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .mjm-quote-text { font-size: 1.2rem; }
 }

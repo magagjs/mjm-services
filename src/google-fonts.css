@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/roboto.eot');
+    src: url('assets/fonts/roboto.eot?#iefix') format('embedded-opentype'),
+    url('assets/fonts/roboto.woff') format('woff'),
+    url('assets/fonts/roboto.ttf') format('truetype'),
+    url('assets/fonts/roboto.svg#svgFontName') format('svg')
+}
