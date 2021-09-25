@@ -26,6 +26,13 @@ h1,h2{
     text-decoration: none;
     color: #B22222;
 }
+.navbar li.nav-item>a.nav-link.mjm-active-nav-link{
+    font-weight: 800;
+    color: #696969;
+    text-decoration: none;
+    padding-right: .2rem;
+    padding-left: .2rem;
+}
 .navbar-nav .bi-twitter, footer .bi-twitter { color: #1da1f2; }
 .navbar-nav .bi-facebook, footer .bi-facebook { color: #3b5998; }
 .navbar-nav .bi-instagram, 
@@ -49,7 +56,6 @@ ul.navbar-nav li.nav-item:active > a > .bi {
     font-weight: 800;
     color: #B22222;
 }
-
 footer { background-color: #A9A9A9; }
 footer h3 {font-size: 1.2rem; font-weight: 600; margin-bottom: 0;}
 footer ul { list-style: none; } 
@@ -93,7 +99,9 @@ footer ul > li:active > a > .bi {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
-.mjm-home-cards { justify-content: center; }
+.mjm-home-cards { 
+    display: flex;
+    justify-content: center; }
 .mjm-home-cards a {
     text-decoration: none;
     color: inherit;
@@ -141,6 +149,7 @@ footer ul > li:active > a > .bi {
 .mjm-quote-container .btn {
     font-size: 1.4rem;
     font-weight: 600;
+    margin-top: .2rem;
 }
 .mjm-quote-container .btn-primary {
     color: #000;
@@ -168,6 +177,43 @@ footer ul > li:active > a > .bi {
     height: auto;
     margin: auto;
 }
+.mjm-offers-banner {
+    background: 
+        linear-gradient(180deg,#af2929,#420a0a, #ac2e2e, );
+    text-align: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-radius: 1.2rem;
+}
+.mjm-offers-banner-text{
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.mjm-offer-card-list {  margin-top: 1rem; }
+.mjm-offer-card-list .card-header,
+.mjm-offer-card-list .card-footer { text-align: center; }
+.mjm-offer-card-list ul { list-style: none; }
+.mjm-offer-card-list ul>li::marker {
+    content: "\f5db\00a0\00a0"; // bootstrap wrench + two &nbsp;
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-size: 1.1rem;
+}
+.mjm-offer-card-list .btn { font-weight: 600; }
+.mjm-offer-card-list .btn-primary {
+    background-color: #c00b0b;
+    border-color: #8B0000;
+}
+.mjm-offer-card-list .btn-primary:hover {
+    background-color: #611313;
+    border-color: #c00b0b;
+}
+.mjm-offer-card-list .btn-primary:focus {
+    background-color: #611313;
+    border-color: #c00b0b;
+    box-shadow: 0 0 0 0.25rem #f51d1d;
+}
 
 // large and up
 @media (min-width: $screen-lg-default) {
@@ -181,9 +227,20 @@ footer ul > li:active > a > .bi {
         border-radius: 5px;
         border-color:#696969;
     }
+    .navbar li.nav-item.active-nav-item {
+        font-weight: 800;
+        color: #696969;
+        text-decoration: none;
+        border-bottom-style: ridge;
+        border-radius: 5px;
+        border-color:#696969;
+        margin-right: .2rem;
+        margin-left: .2rem;
+    }
     .mjm-intro { font-size: 1.5rem; }
     .mjm-offer-wrap ul { margin-top: 1.2rem; }
     .mjm-offer-wrap ul>li{ margin-top: 1rem; }
+    .mjm-offer-card-list {  margin-right: .5rem; }
 }
 
 // large to extra large
@@ -215,6 +272,11 @@ footer ul > li:active > a > .bi {
         outline: 0;                               // suppress ring around element on touch
         -webkit-tap-highlight-color: transparent; // suppress highlight color on Safari and Chrome touch
     }
+    .navbar li.nav-item>a.nav-link.mjm-active-nav-link{
+        font-weight: 800;
+        color: #696969;
+        text-decoration: none;
+    }
     .mjm-offer-wrap {
         margin-top: 1rem;
         padding-top: 1.5rem;
@@ -236,4 +298,7 @@ footer ul > li:active > a > .bi {
         padding-bottom: 1rem;
     }
     .mjm-quote-text { font-size: 1.2rem; }
+    .mjm-offers-banner-text{
+        font-size: 1.2rem;
+    }
 }

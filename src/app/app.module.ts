@@ -13,13 +13,17 @@ import { CarouselModule } from "ngx-bootstrap/carousel";
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { OffersComponent } from './components/offers/offers.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    OffersComponent,
+    BookingsComponent
   ],
   imports: [
     BrowserModule,
