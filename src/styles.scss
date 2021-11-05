@@ -177,15 +177,17 @@ footer ul > li:active > a > .bi {
     height: auto;
     margin: auto;
 }
-.mjm-offers-banner {
+.mjm-offers-banner, 
+.mjm-bookings-banner {
     background: 
         linear-gradient(180deg,#af2929,#420a0a, #ac2e2e, );
     text-align: center;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
-    border-radius: 1.2rem;
+    border-radius: .8rem;
 }
-.mjm-offers-banner-text{
+.mjm-offers-banner-text, 
+.mjm-bookings-banner-text {
     color: #ffffff;
     font-size: 1.5rem;
     font-weight: 900;
@@ -200,20 +202,29 @@ footer ul > li:active > a > .bi {
     font-family: bootstrap-icons !important;
     font-size: 1.1rem;
 }
-.mjm-offer-card-list .btn { font-weight: 600; }
-.mjm-offer-card-list .btn-primary {
+.mjm-offer-card-list .btn, 
+.mjm-bookings-form .btn { font-weight: 600; }
+.mjm-offer-card-list .btn-primary,
+.mjm-bookings-form .btn-primary {
     background-color: #c00b0b;
     border-color: #8B0000;
 }
-.mjm-offer-card-list .btn-primary:hover {
+.mjm-offer-card-list .btn-primary:hover,
+.mjm-bookings-form .btn-primary:hover {
     background-color: #611313;
     border-color: #c00b0b;
 }
-.mjm-offer-card-list .btn-primary:focus {
+.mjm-offer-card-list .btn-primary:focus,
+.mjm-bookings-form .btn-primary:focus {
     background-color: #611313;
     border-color: #c00b0b;
     box-shadow: 0 0 0 0.25rem #f51d1d;
 }
+/*.mjm-bookings-form {
+    display: flex;
+    justify-content: center;
+}*/
+.mjm-bookings-form label { font-weight: 600; }
 
 // large and up
 @media (min-width: $screen-lg-default) {
@@ -300,5 +311,12 @@ footer ul > li:active > a > .bi {
     .mjm-quote-text { font-size: 1.2rem; }
     .mjm-offers-banner-text{
         font-size: 1.2rem;
+    }
+    .mjm-bookings-banner {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .mjm-bookings-banner-text {
+        font-size: 1rem;
     }
 }

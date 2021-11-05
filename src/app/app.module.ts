@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ReactiveFormsModule } from "@angular/forms";
 import { AppComponent } from './app.component';
 
 //ngx-bootstrap modules
@@ -30,7 +31,8 @@ import { BookingsComponent } from './components/bookings/bookings.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
