@@ -11,28 +11,51 @@
         <div class="row mt-4">
             <div class="col-12 mjm-bookings-form">
                 <form [formGroup]="bookingForm" (ngSubmit)="onBookingSubmit()" class="row">
+
                     <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="service">What are you booking:</label></div>
                     <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
-                        <select id="service" name="serviceType">
-                          <option value="serviceType.minor">{{serviceType.minor}}</option>
-                          <option value="serviceType.major">{{serviceType.major}}</option>
-                          <option value="serviceType.diesel">{{serviceType.diesel}}</option>
-                          <option value="serviceType.mech">{{serviceType.mech}}</option>
+                        <select id="service" name="serviceType" formControlName="serviceType">
+                            <option value="null" disabled>Choose your Booking</option>
+                            <option value="{{serviceType.minor}}">{{serviceType.minor}}</option>
+                            <option value="{{serviceType.major}}">{{serviceType.major}}</option>
+                            <option value="{{serviceType.diesel}}">{{serviceType.diesel}}</option>
+                            <option value="{{serviceType.mech}}">{{serviceType.mech}}</option>
                         </select>
                     </div>
+
+                    <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="date">When do you want the booking?</label></div>
+                    <div class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="date" type="date" formControlName="date"> </div>
+
                     <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="name">What is your Name:</label></div>
                     <div class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="name" type="text" formControlName="name"> </div>
+
                     <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="contact">Choose Contact Details:</label></div>
                     <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
-                        <input type="checkbox" id="email" name="email" (change)="emailCheck($event)">&nbsp;
+                        <input type="checkbox" id="emailCheck" name="email" (change)="emailCheck($event)">&nbsp;
                         <label for="email">Email</label>&nbsp;&nbsp;
-                        <input type="checkbox" id="phone" name="phone" (change)="phoneCheck($event)">&nbsp;
+                        <input type="checkbox" id="phoneCheck" name="phone" (change)="phoneCheck($event)">&nbsp;
                         <label for="phone">Phone</label>
                     </div>
-                    <div *ngIf="isEmailChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="emailAddr">Enter Email Address:</label></div>
-                    <div *ngIf="isEmailChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="emailAddr" type="text" formControlName="email"></div>
-                    <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="phoneNr">Enter Phone Number:</label></div>
-                    <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="phoneNr" type="text" formControlName="phone"></div>
+                    
+                    <div *ngIf="isEmailChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="email">Enter Email Address:</label></div>
+                    <div *ngIf="isEmailChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="email" type="text" [email]="true" formControlName="email"></div>
+                    <div *ngIf="(bookingForm.get('email')?.value !== '') && (bookingForm.get('email')?.untouched || bookingForm.get('email')?.invalid) && 
+                        (bookingForm.get('email')?.errors?.pattern)">
+                        <p class="alert alert-danger">Please enter a valid email address</p>
+                    </div>
+
+                    <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="phone">Enter Phone Number:</label></div>
+                    <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="phone" type="text" formControlName="phone"></div>
+                    <div *ngIf="(bookingForm.get('phone')?.value !== '') && (bookingForm.get('phone')?.untouched || bookingForm.get('phone')?.invalid) && 
+                        (bookingForm.get('phone')?.errors?.pattern)">
+                        <p class="alert alert-danger">Please enter a valid phone number</p>
+                    </div>
+
+                    <div *ngIf="(bookingForm.get('phone')?.value !== '') && (bookingForm.get('phone')?.touched || bookingForm.get('phone')?.dirty) && 
+                            (bookingForm.errors?.contactsValidatorDirective)" class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                            <p class="alert alert-danger">Email address or phone number required!</p>
+                    </div>
+
                     <p>
                         <button class="btn btn-primary" type="submit" [disabled]="!bookingForm.valid">Book</button>
                     </p>

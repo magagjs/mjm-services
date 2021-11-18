@@ -91,7 +91,7 @@ footer ul > li:active > a > .bi {
 .mjm-offer-list ul>li::marker {
     content: "\f621\00a0\00a0"; // bootstrap wrench + two &nbsp;
     display: inline-block;
-    font-family: bootstrap-icons !important;
+    font-family: bootstrap-icons, sans-serif !important;
     font-size: 1.1rem;
 }
 .mjm-home-cards-wrap {
@@ -224,6 +224,10 @@ footer ul > li:active > a > .bi {
     display: flex;
     justify-content: center;
 }*/
+.mjm-bookings-form .alert.alert-danger {
+    text-align: center;
+    font-weight: 800;
+}
 .mjm-bookings-form label { font-weight: 600; }
 
 // large and up
