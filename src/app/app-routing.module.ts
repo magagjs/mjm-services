@@ -5,13 +5,14 @@ import { HomeComponent } from './components/home/home.component';
 import { OffersComponent } from './components/offers/offers.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: 'bookings', component: BookingsComponent},
   {path: 'offers', component: OffersComponent},
-  {path: 'bookings', component: BookingsComponent}
+  {path: '', component: HomeComponent}
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

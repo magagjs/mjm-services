@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BookingMobel } from 'src/app/models/booking-mobel';
+import { Router } from '@angular/router';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { mergeMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { BlockUI, NgBlockUI } from "ng-block-ui";
+
+import { BookingMobel } from '../../models/booking-mobel';
+import { BookingResponse } from '../../models/booking-response';
 import { contactsValidatorDirective } from "../../directives/contacts-validator";
+import { MjmCentreService } from '../../services/mjm-centre.service';
+
+
 
 @Component({
   selector: 'mjm-bookings',
@@ -9,6 +19,9 @@ import { contactsValidatorDirective } from "../../directives/contacts-validator"
   styleUrls: ['./bookings.component.scss']
 })
 export class BookingsComponent implements OnInit {
+
+  // wire up BlockUI instance
+  @BlockUI() blockUI!: NgBlockUI;
 
   bookingForm!: FormGroup;
   serviceType = {
@@ -21,8 +34,17 @@ export class BookingsComponent implements OnInit {
   isEmailChecked: boolean = false;
   isPhoneChecked: boolean = false;
   bookingModel!: BookingMobel;
+  bookingResponse!: BookingResponse;
+  isBookingMade: boolean = false;
+  isBookingSuccess: boolean = false;
+  isBookingFail: boolean = false;
+  todayDate: Date = new Date();
+  recaptchaToken!: string;
 
-  constructor( private formbuilder: FormBuilder ) { 
+  constructor( private formbuilder: FormBuilder,
+               private mjmService: MjmCentreService,
+               private router: Router,
+               private recaptchaV3Service: ReCaptchaV3Service ) { 
 
     this.initForm();
   }
@@ -57,15 +79,58 @@ export class BookingsComponent implements OnInit {
       this.bookingForm.controls['phone'].setValue('');
   }
 
-  onBookingSubmit() {
-    console.log("Booking form submitted:");
-    console.log(this.bookingForm);
-    const formValues = this.bookingForm.value; // get form values
-    // assign form values to booking model
-    this.bookingModel = new BookingMobel( formValues.serviceType, formValues.date, 
-      formValues.name, formValues.email, formValues.phone);
-    console.log("Booking Model:");
-    console.log(this.bookingModel);
+  goBackHome() {
+    this.bookingForm.reset();
+    this.isEmailChecked = false;
+    this.isPhoneChecked = false;
+    this.router.navigateByUrl('');
   }
+
+  goBooking() {
+    this.isBookingMade = false;
+    this.bookingForm.reset();
+    this.isEmailChecked = false;
+    this.isPhoneChecked = false;
+  }
+
+  disableOnClick(event: any) {
+    event.currentTarget.disabled=true;
+  }
+
+  checkDate() {
+    let formInputDate = new Date(this.bookingForm.get('date')?.value);
+    if(formInputDate.getTime() < this.todayDate.getTime()) 
+      this.bookingForm.get('date')?.setErrors({'incorrect': 'Date cannot be in the past!'});
+  }
+
+  /* chain recaptcha observable to get token to use to create booking model passed in
+    submitBooking() service function and subscribe to the result*/
+  onBookingSubmit(): Subscription {
+    this.blockUI.start("Submitting Booking...");
+    return this.recaptchaV3Service.execute("Booking").pipe(
+      mergeMap(token => {
+
+        const formValues = this.bookingForm.value; // get form values
+        // instantiate booking model with form values and recaptcha V3 token
+        this.bookingModel = new BookingMobel( token, formValues.serviceType, formValues.date, 
+          formValues.name, formValues.email, formValues.phone);
+    
+        // call booking form webservice and pass booking model
+        return this.mjmService.submitBooking(this.bookingModel);
+      })
+    ).subscribe ( (bookingResponseObservable) => {
+      this.bookingResponse = {...bookingResponseObservable}; // assign returned Observable to response object
+      this.bookingForm.reset();                              // reset form input value for cleanup
+
+      if( this.bookingResponse.bookingStatus == "Success" ) {
+        this.isBookingMade = true;
+        this.isBookingSuccess = true;
+      } else {
+        this.isBookingMade = true;
+        this.isBookingSuccess = false;
+      }
+      this.blockUI.stop();
+    });
+  } 
 
 }

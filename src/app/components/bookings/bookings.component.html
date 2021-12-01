@@ -1,5 +1,5 @@
 <mjm-nav></mjm-nav>
-<main class="container-fluid">
+<main class="container-fluid mjm-bookings-form">
     <div class="row mjm-bookings-banner">
         <div class="row">
             <div class="col-12 mjm-bookings-banner-text">
@@ -7,14 +7,14 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container" *ngIf="isBookingMade == false">
         <div class="row mt-4">
-            <div class="col-12 mjm-bookings-form">
+            <div class="col-12">
                 <form [formGroup]="bookingForm" (ngSubmit)="onBookingSubmit()" class="row">
 
                     <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="service">What are you booking:</label></div>
                     <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
-                        <select id="service" name="serviceType" formControlName="serviceType">
+                        <select class="form-select" id="service" name="serviceType" formControlName="serviceType">
                             <option value="null" disabled>Choose your Booking</option>
                             <option value="{{serviceType.minor}}">{{serviceType.minor}}</option>
                             <option value="{{serviceType.major}}">{{serviceType.major}}</option>
@@ -23,44 +23,83 @@
                         </select>
                     </div>
 
-                    <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="date">When do you want the booking?</label></div>
-                    <div class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="date" type="date" formControlName="date"> </div>
+                    <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="date">When do you want it?</label></div>
+                    <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <input class="form-control" id="date" type="date" min="{{todayDate | date: 'YYYY-MM-dd'}}" formControlName="date"
+                            (change)="checkDate()">
+                        <span class="mjm-contacts-disclaimer d-flex" *ngIf="bookingForm.get('date')?.hasError('incorrect')">
+                            <p>{{bookingForm.get('date')?.getError('incorrect')}}</p></span> 
+                    </div>
 
                     <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="name">What is your Name:</label></div>
-                    <div class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="name" type="text" formControlName="name"> </div>
+                    <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <input class="form-control" id="name" type="text" formControlName="name"></div>
 
                     <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="contact">Choose Contact Details:</label></div>
                     <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
-                        <input type="checkbox" id="emailCheck" name="email" (change)="emailCheck($event)">&nbsp;
-                        <label for="email">Email</label>&nbsp;&nbsp;
-                        <input type="checkbox" id="phoneCheck" name="phone" (change)="phoneCheck($event)">&nbsp;
-                        <label for="phone">Phone</label>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="emailCheck" name="email" (change)="emailCheck($event)">&nbsp;
+                            <label class="form-check-label" for="email">Email</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="phoneCheck" name="phone" (change)="phoneCheck($event)">&nbsp;
+                            <label class="form-check-label" for="phone">Phone</label>&nbsp;&nbsp;
+                        </div>
+                        <span class="mjm-contacts-disclaimer d-flex"><small style="color:#1113a8;">
+                            *Only one contact is needed but you can choose both</small></span>
                     </div>
                     
                     <div *ngIf="isEmailChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="email">Enter Email Address:</label></div>
-                    <div *ngIf="isEmailChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="email" type="text" [email]="true" formControlName="email"></div>
-                    <div *ngIf="(bookingForm.get('email')?.value !== '') && (bookingForm.get('email')?.untouched || bookingForm.get('email')?.invalid) && 
-                        (bookingForm.get('email')?.errors?.pattern)">
-                        <p class="alert alert-danger">Please enter a valid email address</p>
+                    <div *ngIf="isEmailChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <input class="form-control" id="email" type="text" [email]="true" formControlName="email">
+                        <span class="mjm-contacts-disclaimer d-flex" *ngIf="(bookingForm.get('email')?.value !== '') && 
+                                (bookingForm.get('email')?.untouched || bookingForm.get('email')?.invalid) && 
+                                (bookingForm.get('email')?.errors?.pattern && isEmailChecked == true)">
+                            <p>Please enter a valid email address (e.g. name@domain.xyz)</p></span>
                     </div>
 
                     <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="phone">Enter Phone Number:</label></div>
-                    <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2"><input id="phone" type="text" formControlName="phone"></div>
-                    <div *ngIf="(bookingForm.get('phone')?.value !== '') && (bookingForm.get('phone')?.untouched || bookingForm.get('phone')?.invalid) && 
-                        (bookingForm.get('phone')?.errors?.pattern)">
-                        <p class="alert alert-danger">Please enter a valid phone number</p>
+                    <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <input class="form-control" id="phone" type="text" formControlName="phone">
+                        <span class="mjm-contacts-disclaimer d-flex" *ngIf="(bookingForm.get('phone')?.value !== '') && 
+                                (bookingForm.get('phone')?.untouched || bookingForm.get('phone')?.invalid) && 
+                                (bookingForm.get('phone')?.errors?.pattern && isPhoneChecked == true)">
+                            <p>Please enter a valid phone number (e.g. 0712345678)</p></span>
                     </div>
 
-                    <div *ngIf="(bookingForm.get('phone')?.value !== '') && (bookingForm.get('phone')?.touched || bookingForm.get('phone')?.dirty) && 
+                    <div *ngIf="(bookingForm.get('phone')?.value !== '') && (bookingForm.get('phone')?.touched || 
+                            bookingForm.get('phone')?.dirty) && 
                             (bookingForm.errors?.contactsValidatorDirective)" class="col-sm-12 col-md-8 col-lg-9 pb-2">
-                            <p class="alert alert-danger">Email address or phone number required!</p>
+                        <p class="alert alert-danger">Email address or phone number required!</p>
                     </div>
 
-                    <p>
-                        <button class="btn btn-primary" type="submit" [disabled]="!bookingForm.valid">Book</button>
+                    <p style="display: flex; justify-content: center;">
+                        <button class="btn btn-primary" type="submit" [disabled]="!bookingForm.valid" (click)="disableOnClick($event)">Book</button>
                     </p>
                 </form>
+                <p style="display: flex; justify-content: center;">
+                   <small>This site is protected by reCAPTCHA and the Google&nbsp;<a href="https://policies.google.com/privacy">Privacy Policy</a>
+                    and&nbsp;<a href="https://policies.google.com/terms">Terms of Service</a>&nbsp;apply.</small></p>
             </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="isBookingMade == true">
+        <div class="row mt-3" *ngIf="isBookingSuccess == true">
+            <div class="alert alert-success" role="alert">
+                <p class="mb-0"><strong>Your {{bookingResponse.bookingType}} booking for {{bookingResponse.bookingDate}} was successfull!<br>
+                    Thank you {{bookingResponse.bookingName}} for your booking.<br>A representative will contact you to confirm your booking.</strong></p>
+            </div>
+        </div>
+        <div class="row" *ngIf="isBookingSuccess == false">
+            <div class="alert alert-danger" role="alert">
+                <p class="mb-0"><strong>Sorry, your booking failed!<br>
+                    {{bookingResponse.bookingErrMsg}}<br>
+                    Please try again later.</strong></p>
+            </div>
+        </div>
+        <div class="row mjm-bookings-form-confim-btns">
+            <p class="mb-0"><button class="btn btn-primary" (click)="goBackHome()">Close</button>&nbsp;&nbsp;
+                <button class="btn btn-primary" (click)="goBooking()">Book again</button></p>
         </div>
     </div>
 </main>

@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  mjmApiBaseUrl: 'http://localhost/mjm-service-app/api',
+  mjmFormsEndpoint: '/mjmForms.php',
+  recaptcha: {
+    siteKey: '6LfDnVgdAAAAAGyI6ahKTjDvkeRi3bXTMNxJWrgv'
+  }
 };
 
 /*

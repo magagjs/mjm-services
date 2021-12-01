@@ -7,7 +7,7 @@
     "build": "sudo ng build",
     "watch": "sudo ng build --watch --configuration development",
     "test": "sudo ng test",
-    "deploy": "sudo ng b --prod --base-href https://magagjs.github.io/mjm-services/ && sudo npx ngh --no-silent --name=magagjs --email=gagulit@outlook.com --dir=dist/mjm-service-app"
+    "deploy": "sudo ng b --base-href https://magagjs.github.io/mjm-services/ && sudo npx ngh --no-silent --name=magagjs --email=gagulit@outlook.com --dir=dist/mjm-service-app"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +23,8 @@
     "bootstrap": "^5.1.1",
     "bootstrap-icons": "^1.5.0",
     "chokidar": "^3.5.2",
+    "ng-block-ui": "^3.0.2",
+    "ng-recaptcha": "^9.0.0",
     "ngx-bootstrap": "^7.1.0",
     "rxjs": "^7.0.0",
     "tslib": "^2.2.0",

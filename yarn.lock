@@ -1367,6 +1367,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/grecaptcha@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/grecaptcha/-/grecaptcha-3.0.3.tgz#9b487b1d20f7813ea382e8cf7a4b621ae61782c4"
+  integrity sha512-osLqWRzsRsDtCfiCl1lbtUY8ANGCQsG/hhht3E7g1pVT7fD5SXgAg53S2grKjjSkXcm0fvMDbhUeL9NyAJvzGQ==
+
 "@types/jasmine@~3.9.1":
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.9.1.tgz#94c65ee8bf9d24d9e1d84abaed57b6e0da8b49de"
@@ -5109,6 +5114,21 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+ng-block-ui@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/ng-block-ui/-/ng-block-ui-3.0.2.tgz#1ba6d72866524bf000218564c64f2dee29026631"
+  integrity sha512-EP3IXP8WSoKQOAwunf/v77aydcBCSLkEm5K8duRMSXFsnrcTdNqUiaLDKCf9U3COHY52IVBJcLb9PGhMBCWVSA==
+  dependencies:
+    tslib "^1.10.0"
+
+ng-recaptcha@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/ng-recaptcha/-/ng-recaptcha-9.0.0.tgz#11b88f820cfca366d363fffd0f451490f2db2b04"
+  integrity sha512-39YfJh1+p6gvfsGUhC8cmjhFZ1TtQ1OJES5SUgnanPL2aQuwrSX4WyTFh2liFn1dQqtGUVd5O4EhbcexB7AECQ==
+  dependencies:
+    "@types/grecaptcha" "^3.0.3"
+    tslib "^2.2.0"
 
 ngx-bootstrap@^7.1.0:
   version "7.1.0"
