@@ -7,6 +7,8 @@ import { BookingMobel } from '../models/booking-mobel';
 import { BookingResponse } from '../models/booking-response';
 import { QuoteModel } from '../models/quote-model';
 import { QuoteResponse } from '../models/quote-response';
+import { ContactModel } from '../models/contact-model';
+import { ContactResponse } from '../models/contact-response';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,9 @@ export class MjmCentreService {
 
   submitQuote( quoteModel: QuoteModel ): Observable<QuoteResponse> {
     return this.http.post<QuoteResponse>(this.appApiBase + this.formsApiEndpoint, quoteModel)
+  }
+
+  submitContact( contactModel: ContactModel ): Observable<ContactResponse> {
+    return this.http.post<ContactResponse>(this.appApiBase + this.formsApiEndpoint, contactModel)
   }
 }

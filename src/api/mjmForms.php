@@ -14,6 +14,11 @@
     $quoteResponse["quoteStatus"] = "";
     $quoteResponse["quoteErrMsg"] = "";
     $quoteResponse["quoteName"] = "";
+    // prepare contact response array for use as HTTP response
+    $contactResponse = array();
+    $contactResponse["contactStatus"] = "";
+    $contactResponse["contactErrMsg"] = "";
+    $contactResponse["contactName"] = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {              // check request method used by form
         // get raw data after HTTP headers into data stream
@@ -22,7 +27,7 @@
 
         if( !is_null($requestObj) ) {                        // check if posted data is not null
             
-            // get form type (booking form or quote form)
+            // get form type (booking form | quote form | contact form)
             $formType = $requestJson->formType;
             if($formType == 'booking') {
                  // get booking object properties from JSON-booking form values
@@ -31,13 +36,20 @@
                 $name = $requestJson->name;
                 $email = $requestJson->email;
                 $phone = $requestJson->phone;
-            } else {
-                if($formType == 'quote') {
-                    $name = $requestJson->name;
-                    $email = $requestJson->email;
-                    $phone = $requestJson->phone;
-                    $requirements = $requestJson->requirements;
-                }
+            }
+
+            if($formType == 'quote') {
+                $name = $requestJson->name;
+                $email = $requestJson->email;
+                $phone = $requestJson->phone;
+                $requirements = $requestJson->requirements;
+            }
+
+            if($formType == 'contact') {
+                $name = $requestJson->name;
+                $email = $requestJson->email;
+                $phone = $requestJson->phone;
+                $enquiry = $requestJson->enquiry;
             }
 
             $recaptchaToken = $requestJson->recaptchaToken; // get recaptchaToken from JSON-Used on all forms
@@ -176,6 +188,59 @@
 
                 echo json_encode($quoteResponse);
             } // end if(formType == 'quote')
+
+            // process contact form
+            if( $formType == 'contact' ) {
+
+                if(isset($recaptchaVerifyResponse->success) && $recaptchaVerifyResponse->success) {
+                    if(isset($recaptchaVerifyResponse->score) && ($recaptchaVerifyResponse->score >= 0.5)) {
+
+                        // storage
+                        if ( processContactForm( $name, $email, $phone, $enquiry ) ) {
+                            // send email to mjm admin for contact enquiry
+                            if( sendAdminContactEmail ( $name, $email, $phone, $enquiry ) ) {
+                                // also send email to client who made the contact enquiry if email provided
+                                if( !empty($email) ) {
+                                    if ( sendClientEnquiryEmail ( $name, $email, $phone, $enquiry ) ) {
+                                        $contactResponse["contactStatus"] = "Success";
+                                    } else {
+                                        mjmLog("Contact Database Insert Passed but email send to Client failed! ContactInfo=>" . 
+                                            "Name: $name; Email: $email; Phone: $phone; $enquiry");
+                                    }
+                                }
+                                $contactResponse["contactStatus"] = "Success"; // no client email provided - still success
+                                $contactResponse["contactName"] = $name;
+                            } else {
+                                $contactResponse["contactStatus"] = "Fail";
+                                $contactResponse["contactErrMsg"] = "Error sending email!";
+                                $contactResponse["contactName"] = $name;
+                                mjmLog("Contact Database Insert Passed but email send to MJM Admin failed! ContactInfo=>" . 
+                                    "Name: $name; Email: $email; Phone: $phone; $enquiry");
+                            }
+                        } else {
+                            $contactResponse["contactStatus"] = "Fail";
+                            $contactResponse["contactErrMsg"] = "Error in processing contact enquiry data!";
+                            $contactResponse["contactName"] = $name;
+                            mjmLog("Contact Database Insert Failed! ContactInfo=>" . 
+                                "Name: $name; Email: $email; Phone: $phone; $enquiry");
+                        }
+                    } else { // fail challenge when score is <0.5
+                        $contactResponse["contactStatus"] = "Fail";
+                        $contactResponse["contactErrMsg"] = "Google Recaptcha Verification failed! " . 
+                            "Are you a robot? If not, please try again.";
+                        $contactResponse["contactName"] = $name;
+                        mjmLog("Contact Recaptcha Verification Failed-Low score: " . json_encode($recaptchaVerifyResponse,1));
+                    }
+                } else {
+                    $contactResponse["contactStatus"] = "Fail";
+                    $contactResponse["contactErrMsg"] = "Google Recaptcha Verification failed! " . 
+                        "Are you a robot? If not, please try again."; 
+                    $contactResponse["contactName"] = $name;
+                    mjmLog("Contact Recaptcha Verification Failed-No success: " . json_encode($recaptchaVerifyResponse,1));
+                }
+
+                echo json_encode($contactResponse);
+            } // end if(formType == 'contact')
 
         } else {
             mjmLog("Request Object from Observable UI is NULL!");

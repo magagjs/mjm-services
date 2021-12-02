@@ -27,6 +27,7 @@ import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.com
 import { environment } from '../environments/environment';
 import { QuoteComponent } from './components/quote/quote.component';
 import { AutosizeModule } from 'ngx-autosize';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AutosizeModule } from 'ngx-autosize';
     OffersComponent,
     BookingsComponent,
     BreadCrumbsComponent,
-    QuoteComponent
+    QuoteComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,107 @@
+<mjm-nav></mjm-nav>
+<main class="container-fluid mjm-forms-wrap">
+    <header *ngIf="isContactMade == false" class="mjm-contacts-header">
+        <img src="assets/images/contact Header.jpg" style="display: block; width: 95vw; height: 65vmin;" 
+            alt="Header image of a marker pen with a blue front tip and a blue back tip. The middle section 
+            of the marker pen has a black background and three icons. The first icon is an envelope similar 
+            to the Gmail mail logo. The second icon is the at sybmol used is email addresses. The third icon 
+            is a symbol of a telephone. Beneath the marker pen are the words 'Contact Us'.">
+    </header>
+
+    <div class="container mjm-contacts-details" *ngIf="isContactMade == false">
+        <div class="row">
+            <section class="col-12">
+                <h1>Contact Details</h1>
+                <p><i class="bi bi-telephone-fill"></i>0123456789</p>
+                <p><i class="bi bi-whatsapp"></i>9876543210</p>
+                <p><i class="bi bi-envelope-fill"></i>info@mjmservices.co.za</p>
+            </section>
+        </div>
+    </div>
+    <div class="container-fluid mjm-contacts-form" *ngIf="isContactMade == false">
+        <div class="col-12 ps-0 pe-0 pt-2 pb-2">
+            <p>Enter your details below and we will contact you</p>
+        </div>
+        <div class="container">
+            <form [formGroup]="contactForm" (ngSubmit)="onContactSubmit()" class="row">
+                <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="name">Name:</label></div>
+                <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                    <input autosize class="form-control" id="name" type="text" formControlName="name"></div>
+
+                <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="contact">Preferred Contact Method:</label></div>
+                <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="emailCheck" name="email" (change)="emailCheck($event)">&nbsp;
+                        <label class="form-check-label" for="email">Email</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="phoneCheck" name="phone" (change)="phoneCheck($event)">&nbsp;
+                        <label class="form-check-label" for="phone">Phone</label>&nbsp;&nbsp;
+                    </div>
+                    <span class="mjm-contacts-disclaimer d-flex"><small style="color:#1113a8;">
+                        *Only one method is needed but you can choose both</small></span>
+                </div>
+                
+                <div *ngIf="isEmailChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="email">Enter Email Address:</label></div>
+                <div *ngIf="isEmailChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                    <input class="form-control" id="email" type="text" [email]="true" formControlName="email">
+                    <span class="mjm-contacts-disclaimer d-flex" *ngIf="(contactForm.get('email')?.value !== '') && 
+                            (contactForm.get('email')?.untouched || contactForm.get('email')?.invalid) && 
+                            (contactForm.get('email')?.errors?.pattern && isEmailChecked == true)">
+                        <p>Please enter a valid email address (e.g. name@domain.xyz)</p></span>
+                </div>
+
+                <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="phone">Enter Phone Number:</label></div>
+                <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                    <input class="form-control" id="phone" type="text" formControlName="phone">
+                    <span class="mjm-contacts-disclaimer d-flex" *ngIf="(contactForm.get('phone')?.value !== '') && 
+                            (contactForm.get('phone')?.untouched || contactForm.get('phone')?.invalid) && 
+                            (contactForm.get('phone')?.errors?.pattern && isPhoneChecked == true)">
+                        <p>Please enter a valid phone number (e.g. 0712345678)</p></span>
+                </div>
+
+                <div *ngIf="(contactForm.get('phone')?.value !== '') && (contactForm.get('phone')?.touched || 
+                        contactForm.get('phone')?.dirty) && 
+                        (contactForm.errors?.contactsValidatorDirective)" class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                    <p class="alert alert-danger">Email address or phone number required!</p>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="enquiry">Enquiry:</label></div>
+                <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                    <textarea autosize [minRows]="5" class="form-control" id="enquiry" name="enquiry" 
+                        formControlName="enquiry">
+                        
+                    </textarea>
+                </div>
+
+                <p style="display: flex; justify-content: center;">
+                    <button class="btn btn-primary" type="submit" [disabled]="!contactForm.valid" (click)="disableOnClick($event)">Submit</button>
+                </p>
+            </form>
+
+            <p style="display: flex; justify-content: center; margin-bottom: 0; margin-top: .6rem; color: #000000; font-weight: 500">
+                <small>This site is protected by reCAPTCHA and the Google&nbsp;<a href="https://policies.google.com/privacy">Privacy Policy</a>
+                and&nbsp;<a href="https://policies.google.com/terms">Terms of Service</a>&nbsp;apply.</small></p>
+        </div> 
+    </div>
+    <div class="container" *ngIf="isContactMade == true">
+        <div class="row mt-3" *ngIf="isContactSuccess == true">
+            <div class="alert alert-success" role="alert">
+                <p class="mb-0"><strong>Your enquiry has been submitted!<br>
+                    Thank you {{contactResponse.contactName}} for contacting us.<br>A representative will contact you soon.</strong></p>
+            </div>
+        </div>
+        <div class="row" *ngIf="isContactSuccess == false">
+            <div class="alert alert-danger" role="alert">
+                <p class="mb-0"><strong>Sorry, your enquiry was not submitted!<br>
+                    {{contactResponse.contactErrMsg}}<br>
+                    Please try again later.</strong></p>
+            </div>
+        </div>
+        <div class="row mjm-forms-confim-btns">
+            <p class="mb-0"><button class="btn btn-primary" (click)="goBackHome()">Close</button>&nbsp;&nbsp;
+                <button class="btn btn-primary" (click)="goContact()">Go Back</button></p>
+        </div>
+    </div>
+</main>
+<mjm-footer></mjm-footer>
