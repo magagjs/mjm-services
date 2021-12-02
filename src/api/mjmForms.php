@@ -76,7 +76,6 @@
                 if(isset($recaptchaVerifyResponse->success) && $recaptchaVerifyResponse->success) {
                     if(isset($recaptchaVerifyResponse->score) && ($recaptchaVerifyResponse->score >= 0.5)) {
             
-                        // storage
                         if ( processBookingForm($bookingType, $date, $name, $email, $phone) ) {
                             // send email to mjm admin for booking
                             if( sendAdminBookingEmail ($bookingType, $date, $name, $email, $phone) ) {
@@ -142,7 +141,6 @@
                 if(isset($recaptchaVerifyResponse->success) && $recaptchaVerifyResponse->success) {
                     if(isset($recaptchaVerifyResponse->score) && ($recaptchaVerifyResponse->score >= 0.5)) {
 
-                        // storage
                         if ( processQuoteForm( $name, $email, $phone, $requirements ) ) {
                             // send email to mjm admin for quote
                             if( sendAdminQuoteEmail ( $name, $email, $phone, $requirements ) ) {
@@ -195,7 +193,6 @@
                 if(isset($recaptchaVerifyResponse->success) && $recaptchaVerifyResponse->success) {
                     if(isset($recaptchaVerifyResponse->score) && ($recaptchaVerifyResponse->score >= 0.5)) {
 
-                        // storage
                         if ( processContactForm( $name, $email, $phone, $enquiry ) ) {
                             // send email to mjm admin for contact enquiry
                             if( sendAdminContactEmail ( $name, $email, $phone, $enquiry ) ) {
