@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { BookingMobel } from '../models/booking-mobel';
 import { BookingResponse } from '../models/booking-response';
+import { QuoteModel } from '../models/quote-model';
+import { QuoteResponse } from '../models/quote-response';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +20,9 @@ export class MjmCentreService {
 
   submitBooking( bookingModel: BookingMobel ): Observable<BookingResponse> {
     return this.http.post<BookingResponse>(this.appApiBase + this.formsApiEndpoint, bookingModel)
+  }
+
+  submitQuote( quoteModel: QuoteModel ): Observable<QuoteResponse> {
+    return this.http.post<QuoteResponse>(this.appApiBase + this.formsApiEndpoint, quoteModel)
   }
 }

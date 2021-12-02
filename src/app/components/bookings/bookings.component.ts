@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { mergeMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { BlockUI, NgBlockUI } from "ng-block-ui";
 
 import { BookingMobel } from '../../models/booking-mobel';
@@ -37,9 +37,9 @@ export class BookingsComponent implements OnInit {
   bookingResponse!: BookingResponse;
   isBookingMade: boolean = false;
   isBookingSuccess: boolean = false;
-  isBookingFail: boolean = false;
   todayDate: Date = new Date();
   recaptchaToken!: string;
+  formType: string = "booking";
 
   constructor( private formbuilder: FormBuilder,
                private mjmService: MjmCentreService,
@@ -60,8 +60,7 @@ export class BookingsComponent implements OnInit {
       "phone": ['', {
         validators: [Validators.pattern(new RegExp("^[0-9 ]{10}$"))],
         updateOn: 'change'}]
-    },
-    {validator: contactsValidatorDirective(Validators.required, ['email', 'phone'])} );
+    }, {validator: contactsValidatorDirective(Validators.required, ['email', 'phone'])} as AbstractControlOptions );
   }
   
   ngOnInit(){}
@@ -112,10 +111,10 @@ export class BookingsComponent implements OnInit {
 
         const formValues = this.bookingForm.value; // get form values
         // instantiate booking model with form values and recaptcha V3 token
-        this.bookingModel = new BookingMobel( token, formValues.serviceType, formValues.date, 
+        this.bookingModel = new BookingMobel( this.formType, token, formValues.serviceType, formValues.date, 
           formValues.name, formValues.email, formValues.phone);
     
-        // call booking form webservice and pass booking model
+        // call booking webservice and pass booking model
         return this.mjmService.submitBooking(this.bookingModel);
       })
     ).subscribe ( (bookingResponseObservable) => {

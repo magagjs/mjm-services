@@ -17,4 +17,8 @@ export class OffersComponent implements OnInit {
     this.router.navigateByUrl('bookings');
   }
 
+  goToQuotes(){
+    this.router.navigateByUrl('quotes');
+  }
+
 }

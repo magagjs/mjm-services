@@ -26,6 +26,7 @@ import { BookingsComponent } from './components/bookings/bookings.component';
 import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.component';
 import { environment } from '../environments/environment';
 import { QuoteComponent } from './components/quote/quote.component';
+import { AutosizeModule } from 'ngx-autosize';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { QuoteComponent } from './components/quote/quote.component';
     OffersComponent,
     BookingsComponent,
     BreadCrumbsComponent,
-    QuoteComponent,
+    QuoteComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +48,8 @@ import { QuoteComponent } from './components/quote/quote.component';
     CarouselModule.forRoot(),
     ReactiveFormsModule,
     RecaptchaV3Module,
-    BlockUIModule.forRoot()
+    BlockUIModule.forRoot(),
+    AutosizeModule
   ],
   providers: [
     {

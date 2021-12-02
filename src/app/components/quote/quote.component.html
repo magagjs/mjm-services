@@ -1,1 +1,95 @@
-<p>quote works!</p>
+<mjm-nav></mjm-nav>
+<main class="container-fluid mjm-forms-wrap">
+    <div class="row mjm-forms-banner">
+        <div class="row">
+            <div class="col-12 mjm-forms-banner-text">
+                Get a Quote
+            </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="isQuoteMade == false">
+        <div class="row mt-4">
+            <div class="col-12">
+                <form [formGroup]="quoteForm" (ngSubmit)="onQuoteSubmit()" class="row">
+
+                    <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="name">What is your Name:</label></div>
+                    <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <input class="form-control" id="name" type="text" formControlName="name"></div>
+
+                    <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="contact">Preferred Contact Method:</label></div>
+                    <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="emailCheck" name="email" (change)="emailCheck($event)">&nbsp;
+                            <label class="form-check-label" for="email">Email</label>&nbsp;&nbsp;
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="phoneCheck" name="phone" (change)="phoneCheck($event)">&nbsp;
+                            <label class="form-check-label" for="phone">Phone</label>&nbsp;&nbsp;
+                        </div>
+                        <span class="mjm-contacts-disclaimer d-flex"><small style="color:#1113a8;">
+                            *Only one method is needed but you can choose both</small></span>
+                    </div>
+                    
+                    <div *ngIf="isEmailChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="email">Enter Email Address:</label></div>
+                    <div *ngIf="isEmailChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <input class="form-control" id="email" type="text" [email]="true" formControlName="email">
+                        <span class="mjm-contacts-disclaimer d-flex" *ngIf="(quoteForm.get('email')?.value !== '') && 
+                                (quoteForm.get('email')?.untouched || quoteForm.get('email')?.invalid) && 
+                                (quoteForm.get('email')?.errors?.pattern && isEmailChecked == true)">
+                            <p>Please enter a valid email address (e.g. name@domain.xyz)</p></span>
+                    </div>
+
+                    <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="phone">Enter Phone Number:</label></div>
+                    <div *ngIf="isPhoneChecked" class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <input class="form-control" id="phone" type="text" formControlName="phone">
+                        <span class="mjm-contacts-disclaimer d-flex" *ngIf="(quoteForm.get('phone')?.value !== '') && 
+                                (quoteForm.get('phone')?.untouched || quoteForm.get('phone')?.invalid) && 
+                                (quoteForm.get('phone')?.errors?.pattern && isPhoneChecked == true)">
+                            <p>Please enter a valid phone number (e.g. 0712345678)</p></span>
+                    </div>
+
+                    <div *ngIf="(quoteForm.get('phone')?.value !== '') && (quoteForm.get('phone')?.touched || 
+                            quoteForm.get('phone')?.dirty) && 
+                            (quoteForm.errors?.contactsValidatorDirective)" class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <p class="alert alert-danger">Email address or phone number required!</p>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 col-lg-3 pb-2"><label for="requirements">What are your requirements:</label></div>
+                    <div class="col-sm-12 col-md-8 col-lg-9 pb-2">
+                        <textarea autosize [minRows]="5" class="form-control" id="requirements" name="requirements" 
+                            formControlName="requirements">
+                            
+                        </textarea>
+                    </div>
+
+                    <p style="display: flex; justify-content: center;">
+                        <button class="btn btn-primary" type="submit" [disabled]="!quoteForm.valid" (click)="disableOnClick($event)">Get Quote</button>
+                    </p>
+                </form>
+                <p style="display: flex; justify-content: center; margin-bottom: 0; margin-top: 2rem">
+                   <small>This site is protected by reCAPTCHA and the Google&nbsp;<a href="https://policies.google.com/privacy">Privacy Policy</a>
+                    and&nbsp;<a href="https://policies.google.com/terms">Terms of Service</a>&nbsp;apply.</small></p>
+            </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="isQuoteMade == true">
+        <div class="row mt-3" *ngIf="isQuoteSuccess == true">
+            <div class="alert alert-success" role="alert">
+                <p class="mb-0"><strong>Your quotation has been submitted!<br>
+                    Thank you {{quoteResponse.quoteName}} for your quote.<br>A representative will contact you soon.</strong></p>
+            </div>
+        </div>
+        <div class="row" *ngIf="isQuoteSuccess == false">
+            <div class="alert alert-danger" role="alert">
+                <p class="mb-0"><strong>Sorry, your quote was not submitted!<br>
+                    {{quoteResponse.quoteErrMsg}}<br>
+                    Please try again later.</strong></p>
+            </div>
+        </div>
+        <div class="row mjm-forms-confim-btns">
+            <p class="mb-0"><button class="btn btn-primary" (click)="goBackHome()">Close</button>&nbsp;&nbsp;
+                <button class="btn btn-primary" (click)="goQuote()">Quote again</button></p>
+        </div>
+    </div>
+</main>
+<mjm-footer></mjm-footer>

@@ -25,6 +25,7 @@
     "chokidar": "^3.5.2",
     "ng-block-ui": "^3.0.2",
     "ng-recaptcha": "^9.0.0",
+    "ngx-autosize": "^1.8.4",
     "ngx-bootstrap": "^7.1.0",
     "rxjs": "^7.0.0",
     "tslib": "^2.2.0",

@@ -15,5 +15,8 @@ export class HomeComponent implements OnInit {
   goToBookings(){
     this.router.navigateByUrl('bookings');
   }
+  goToQuotes(){
+    this.router.navigateByUrl('quotes');
+  }
 
 }

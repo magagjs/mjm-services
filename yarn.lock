@@ -5130,6 +5130,13 @@ ng-recaptcha@^9.0.0:
     "@types/grecaptcha" "^3.0.3"
     tslib "^2.2.0"
 
+ngx-autosize@^1.8.4:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/ngx-autosize/-/ngx-autosize-1.8.4.tgz#b9c14fe276d4d0ba19efa6ade86edd2dcf8c811f"
+  integrity sha512-eswPninzx2H1AyZrSNS36wMd4eLg9Hce5Utc23J3dAGher/PNC+6X9MBTqsOnQGbQk7wV1dhlZZH3252VwB05A==
+  dependencies:
+    tslib "^1.9.0"
+
 ngx-bootstrap@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-7.1.0.tgz#60cd83b1d2da52ffd9f8ca6f270e77010d55cf5a"

@@ -179,7 +179,7 @@ footer ul > li:active > a > .bi {
     margin: auto;
 }
 .mjm-offers-banner, 
-.mjm-bookings-banner {
+.mjm-forms-banner {
     background: 
         linear-gradient(180deg,#af2929,#420a0a, #ac2e2e, );
     text-align: center;
@@ -188,7 +188,7 @@ footer ul > li:active > a > .bi {
     border-radius: .8rem;
 }
 .mjm-offers-banner-text, 
-.mjm-bookings-banner-text {
+.mjm-forms-banner-text {
     color: #ffffff;
     font-size: 1.5rem;
     font-weight: 900;
@@ -204,33 +204,33 @@ footer ul > li:active > a > .bi {
     font-size: 1.1rem;
 }
 .mjm-offer-card-list .btn, 
-.mjm-bookings-form .btn { font-weight: 600; }
+.mjm-forms-wrap .btn { font-weight: 600; }
 .mjm-offer-card-list .btn-primary,
-.mjm-bookings-form .btn-primary {
+.mjm-forms-wrap .btn-primary {
     background-color: #c00b0b;
     border-color: #8B0000;
 }
 .mjm-offer-card-list .btn-primary:hover,
-.mjm-bookings-form .btn-primary:hover {
+.mjm-forms-wrap .btn-primary:hover {
     background-color: #611313;
     border-color: #c00b0b;
 }
 .mjm-offer-card-list .btn-primary:focus,
-.mjm-bookings-form .btn-primary:focus {
+.mjm-forms-wrap .btn-primary:focus {
     background-color: #611313;
     border-color: #c00b0b;
     box-shadow: 0 0 0 0.25rem #f51d1d;
 }
-/*.mjm-bookings-form {
+/*.mjm-forms-wrap {
     display: flex;
     justify-content: center;
 }*/
-.mjm-bookings-form .alert.alert-danger {
+.mjm-forms-wrap .alert.alert-danger {
     text-align: center;
     font-weight: 800;
 }
-.mjm-bookings-form label { font-weight: 600; }
-.mjm-bookings-form-confim-btns p    {
+.mjm-forms-wrap label { font-weight: 600; }
+.mjm-forms-confim-btns p    {
     display: flex;
     justify-content: center;
 }
@@ -358,11 +358,11 @@ div.block-ui-spinner .message {
     .mjm-offers-banner-text{
         font-size: 1.2rem;
     }
-    .mjm-bookings-banner {
+    .mjm-forms-banner {
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
-    .mjm-bookings-banner-text {
+    .mjm-forms-banner-text {
         font-size: 1rem;
     }
     .mjm-contacts-disclaimer small {
