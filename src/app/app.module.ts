@@ -23,11 +23,11 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { OffersComponent } from './components/offers/offers.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
-import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.component';
 import { environment } from '../environments/environment';
 import { QuoteComponent } from './components/quote/quote.component';
 import { AutosizeModule } from 'ngx-autosize';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +37,9 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     FooterComponent,
     OffersComponent,
     BookingsComponent,
-    BreadCrumbsComponent,
     QuoteComponent,
-    ContactsComponent
+    ContactsComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

@@ -34,7 +34,7 @@ h1,h2{
     padding-right: .2rem;
     padding-left: .2rem;
 }
-.navbar-nav .bi-twitter, footer .bi-twitter { color: #1da1f2; }
+//.navbar-nav .bi-twitter, footer .bi-twitter { color: #1da1f2; }
 .navbar-nav .bi-facebook, footer .bi-facebook { color: #3b5998; }
 .navbar-nav .bi-instagram, 
 footer .bi-instagram {
@@ -43,7 +43,7 @@ footer .bi-instagram {
     //background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     background-clip: text;
 }
-.navbar-nav .bi-whatsapp, 
+/*.navbar-nav .bi-whatsapp, 
 footer .bi-whatsapp {
     color: #ffffff;
     background: 
@@ -51,7 +51,7 @@ footer .bi-whatsapp {
         radial-gradient(#25D366 60%, transparent 0);
 }
 .navbar-nav .bi-linkedin, footer .bi-linkedin { color: #2867b2; }
-.navbar-nav .bi-youtube, footer .bi-youtube { color: #cd201f; }
+.navbar-nav .bi-youtube, footer .bi-youtube { color: #cd201f; }*/
 ul.navbar-nav li.nav-item:hover > a > .bi,
 ul.navbar-nav li.nav-item:focus > a > .bi,
 ul.navbar-nav li.nav-item:active > a > .bi {
@@ -410,4 +410,5 @@ div.block-ui-spinner .message {
     .mjm-offer-card-list ul li {
         text-indent: -.7rem;
     }
+    .mjm-copyright { font-size: .7rem; }
 }

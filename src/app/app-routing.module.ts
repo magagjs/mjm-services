@@ -4,6 +4,7 @@ import { BookingsComponent } from './components/bookings/bookings.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { HomeComponent } from './components/home/home.component';
 import { OffersComponent } from './components/offers/offers.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 import { QuoteComponent } from './components/quote/quote.component';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: 'offers', component: OffersComponent},
   {path: 'quotes', component: QuoteComponent},
   {path: 'contacts', component: ContactsComponent},
+  {path: 'privacy', component: PrivacyComponent},
   {path: '', component: HomeComponent}
 
 ];
