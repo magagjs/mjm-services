@@ -1,5 +1,6 @@
 <?php
-    require "../../../config/mjmConfig.php";
+    //require "../../../config/mjmConfig.php";
+    require "../../config/mjmConfig.php";
 
     global $recaptchaVerifyUrl, $recaptchaVerifyKey;
     // prepare booking response array for use as HTTP response
