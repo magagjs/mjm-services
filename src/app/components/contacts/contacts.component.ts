@@ -10,6 +10,7 @@ import { contactsValidatorDirective } from '../../directives/contacts-validator'
 import { MjmCentreService } from '../../services/mjm-centre.service';
 import { ContactModel } from 'src/app/models/contact-model';
 import { ContactResponse } from 'src/app/models/contact-response';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'mjm-contacts',
@@ -18,6 +19,7 @@ import { ContactResponse } from 'src/app/models/contact-response';
 })
 export class ContactsComponent implements OnInit {
 
+  docTitle = "MJM - Contact Us"; // current HTML document title
   // wire up BlockUI instance
   @BlockUI() blockUI!: NgBlockUI;
 
@@ -30,7 +32,8 @@ export class ContactsComponent implements OnInit {
   contactResponse!: ContactResponse;
   formType: string = "contact";
 
-  constructor( private formbuilder: FormBuilder, 
+  constructor( private titleService: Title,         // 'Title' service is for current HTML document title
+               private formbuilder: FormBuilder, 
                private mjmService: MjmCentreService,
                private router: Router,
                private recaptchaV3Service: ReCaptchaV3Service ) { 
@@ -52,6 +55,7 @@ export class ContactsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.docTitle);
   }
 
   emailCheck(e: Event) {

@@ -10,6 +10,7 @@ import { contactsValidatorDirective } from '../../directives/contacts-validator'
 import { QuoteResponse } from '../../models/quote-response';
 import { QuoteModel } from '../../models/quote-model';
 import { MjmCentreService } from '../../services/mjm-centre.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'mjm-quote',
@@ -18,6 +19,7 @@ import { MjmCentreService } from '../../services/mjm-centre.service';
 })
 export class QuoteComponent implements OnInit {
 
+  docTitle = "MJM - Quotes";  // current HTML document title
   // wire up BlockUI instance
   @BlockUI() blockUI!: NgBlockUI;
 
@@ -30,7 +32,8 @@ export class QuoteComponent implements OnInit {
   quoteResponse!: QuoteResponse;
   formType: string = "quote";
 
-  constructor( private formbuilder: FormBuilder, 
+  constructor( private titleService: Title,         // 'Title' service is for current HTML document title
+               private formbuilder: FormBuilder, 
                private mjmService: MjmCentreService,
                private router: Router,
                private recaptchaV3Service: ReCaptchaV3Service) { 
@@ -52,6 +55,7 @@ export class QuoteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.docTitle);
   }
 
   emailCheck(e: Event) {

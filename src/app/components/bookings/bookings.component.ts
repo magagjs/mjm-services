@@ -10,8 +10,7 @@ import { BookingMobel } from '../../models/booking-mobel';
 import { BookingResponse } from '../../models/booking-response';
 import { contactsValidatorDirective } from "../../directives/contacts-validator";
 import { MjmCentreService } from '../../services/mjm-centre.service';
-
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'mjm-bookings',
@@ -20,6 +19,7 @@ import { MjmCentreService } from '../../services/mjm-centre.service';
 })
 export class BookingsComponent implements OnInit {
 
+  docTitle = "MJM - Bookings"; // current HTML document title
   // wire up BlockUI instance
   @BlockUI() blockUI!: NgBlockUI;
 
@@ -41,7 +41,8 @@ export class BookingsComponent implements OnInit {
   recaptchaToken!: string;
   formType: string = "booking";
 
-  constructor( private formbuilder: FormBuilder,
+  constructor( private titleService: Title,     // 'Title' service is for current HTML document title
+               private formbuilder: FormBuilder,
                private mjmService: MjmCentreService,
                private router: Router,
                private recaptchaV3Service: ReCaptchaV3Service ) { 
@@ -63,7 +64,9 @@ export class BookingsComponent implements OnInit {
     }, {validator: contactsValidatorDirective(Validators.required, ['email', 'phone'])} as AbstractControlOptions );
   }
   
-  ngOnInit(){}
+  ngOnInit(){
+    this.titleService.setTitle(this.docTitle);
+  }
 
   emailCheck(e: Event) {
     this.isEmailChecked = !this.isEmailChecked;

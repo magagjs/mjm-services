@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "sudo ng serve",
-    "build": "sudo ng build",
+    "build": "sudo ng build --base-href ./",
     "watch": "sudo ng build --watch --configuration development",
     "test": "sudo ng test",
     "deploy": "sudo ng b --base-href https://magagjs.github.io/mjm-services/ && sudo npx ngh --no-silent --name=magagjs --email=gagulit@outlook.com --dir=dist/mjm-service-app"
