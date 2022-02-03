@@ -28,6 +28,9 @@ import { QuoteComponent } from './components/quote/quote.component';
 import { AutosizeModule } from 'ngx-autosize';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
+import { Router, Scroll } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @NgModule({
   declarations: [
@@ -62,4 +65,25 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  // define appwide behaviour for scrolling, with timeouts to allow page load
+  // EHoltz-https://stackoverflow.com/questions/57962061/angular-8-scroll-to-a-fragment-doesnt-bring-the-fragment-to-the-top-of-the-pag
+  constructor(router: Router, viewportScroller: ViewportScroller) {
+    router.events.pipe(
+      filter((e): e is Scroll => e instanceof Scroll)
+    ).subscribe(e => {
+      if(e.position) {
+        // backward navigation - last defined position
+        setTimeout(() => {viewportScroller.scrollToPosition(e.position!); }, 0);
+      } else if (e.anchor) {
+        // anchor navigation - anchor position defined by fragments or links
+        setTimeout(() => {viewportScroller.scrollToAnchor(e.anchor!); }, 0);
+      } else {
+        // forward navigation - top position previous position not defined
+        setTimeout(() => {viewportScroller.scrollToPosition([0,0]); }, 0);
+      }
+    });
+  }
+
+}
